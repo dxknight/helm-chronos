@@ -5,7 +5,7 @@
 ;; Author: David Knight <dxknight@opmbx.org>
 ;; Created: 20 May 2015
 ;; Package-Version: 1.0
-;; Package-Requires: ((chronos "1.0") (helm "0.0.0"))
+;; Package-Requires: ((chronos "1.0") (helm "1.7.1"))
 ;; Version: 1.0
 ;; Keywords: calendar
 ;; URL: http://github.com/dxknight/helm-chronos
