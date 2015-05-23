@@ -19,6 +19,14 @@ chronos expiry time specification and a message, separated by /.  For
 example: "5/Coffee" would be for a timer expiring in five minutes with
 the message "Coffee".
 
+## Configuration
+
+No configuration is necessary, but you will probably want to bind
+`helm-chronos-add-timer` to a handy key combination, and you may want to set
+`helm-chronos-standard-timers` to a list of time/message strings useful to your needs.
+
+See `M-x customize-group` helm-chronos for other customizable items.
+
 # Example
 
 I want to steam some asparagus.  I have already defined some standard timers in
