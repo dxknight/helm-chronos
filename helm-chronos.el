@@ -141,7 +141,7 @@
 
 (defun helm-chronos--read-recent-timers ()
   "Read helm-chronos--recent-timers from the file
-  helm-chronos-recent-timers-file."
+  helm-chronos-recent-timers-file.  Return nil if unreadable."
   (if (file-readable-p helm-chronos-recent-timers-file)
       (split-string (with-temp-buffer
                       (insert-file-contents helm-chronos-recent-timers-file)
@@ -149,7 +149,8 @@
                     "\n"
                     t)
     (message "Cannot read recent timers from %s"
-             helm-chronos-recent-timers-file)))
+             helm-chronos-recent-timers-file)
+    nil))
 
 (defun helm-chronos--save-recent-timers ()
   "Save at most helm-chronos-recent-timers-limit
