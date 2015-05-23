@@ -102,19 +102,19 @@
 (defvar helm-chronos--standard-timers-source
   '((name . "Standard timers")
     (candidates . helm-chronos-standard-timers)
-    (action . helm-chronos--parse-string-and-add-timer))
+    (action . (("Add timer" . helm-chronos--parse-string-and-add-timer))))
   "Helm source to select from standard timers list.")
 
 (defvar helm-chronos--recent-timers-source
   '((name . "Recent timers")
     (candidates . helm-chronos--recent-timers)
-    (action . helm-chronos--parse-string-and-add-timer))
+    (action . (("Add timer" . helm-chronos--parse-string-and-add-timer))))
   "Helm source to select from recent non-standard timers list.")
 
 (defvar helm-chronos--fallback-source
   '((name . "Enter <expiry time spec>/<message>")
     (dummy)
-    (action . helm-chronos--parse-string-and-add-timer)))
+    (action . (("Add timer" . helm-chronos--parse-string-and-add-timer)))))
 
 ;;;###autoload
 (defun helm-chronos-add-timer ()
@@ -160,7 +160,7 @@
               (item-list helm-chronos--recent-timers))
           (while (and item-list
                       (> max-items 0))
-            (insert (print (pop item-list)))
+            (insert (pop item-list))
             (newline)
             (setq max-items (1- max-items)))))
     (message "Cannot write recent timers to %s"
