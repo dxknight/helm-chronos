@@ -13,23 +13,23 @@ package for Emacs https://github.com/dxknight/chronos.
 Ensure you already have `helm` and `chronos` installed.  Put `helm-chronos.el`
 somewhere Emacs can find it and evaluate:
 
-     `(require 'helm-chronos)`.
+     (require 'helm-chronos)
 
 ## MELPA
 
 If you have set up access to MELPA http://melpa.org/#/getting-started, you can
 install helm-chronos and its dependencies using:
 
-     `M-x package-install helm-chronos`.
+     M-x package-install helm-chronos
 
 ## MELPA/use-package
 
 If you have MELPA and `use-package` https://github.com/jwiegley/use-package,
 you can install (with dependencies) by evaluating:
 
-     `(use-package helm-chronos :ensure t)`
+     (use-package helm-chronos :ensure t)
 
-Adding that snippet to your init file if you want helm chronos for future sessions.
+Add that snippet to your init file if you want helm chronos for future sessions.
 
 ## Quick start
 
