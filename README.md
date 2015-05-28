@@ -38,16 +38,18 @@ you enter against predefined timers.  If no timer matches your pattern, a timer
 definition can be entered directly and will be remembered for this and future
 sessions.
 
-In helm-chronos, the format for timers is a string consisting of a chronos
-expiry time specification and a message, separated by /.  For example:
-"5/Coffee" would be for a timer expiring in five minutes with the message
-"Coffee".  See the `chronos` documentation for more details on expiry time
-specifications.
+In helm-chronos, the format for timers is the same as that for
+`chronos-add-timers-from-string` - a string consisting of a chronos expiry time
+specification and a message, separated by /.  For example: "5/Coffee" would be
+for a timer expiring in five minutes with the message "Coffee".  See the
+`chronos` documentation for more details on expiry time specifications.
 
 Setting a timer relative to another timer's expiry (rather than current time) is
 done by selecting the timer and using the prefix argument, as with standard
 `chronos`.  However, remember that with `helm`, the `C-u` is entered when
 already in the helm interface, not before calling it up.
+
+You can also add multiple cumulative timers by separating them with `+`. 
 
 ## Configuration
 
@@ -64,7 +66,8 @@ file, for example:
       :ensure    t
       :init      (setq helm-chronos-standard-timers
                        '( "     5/Coffee"
-                          "     4/Soak noodles"))
+                          "     4/Soak noodles"
+                          "    25/Pomodoro: Work on helm-chronos + 5/Pomodoro: Rest"))
       :bind      (("C-c t" . helm-chronos-add-timer)))
 
 # Example

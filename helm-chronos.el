@@ -4,9 +4,9 @@
 
 ;; Author: David Knight <dxknight@opmbx.org>
 ;; Created: 20 May 2015
-;; Package-Version: 1.0
-;; Package-Requires: ((chronos "1.0") (helm "1.7.1"))
-;; Version: 1.0
+;; Package-Version: 1.1
+;; Package-Requires: ((chronos "1.2") (helm "1.7.1"))
+;; Version: 1.1
 ;; Keywords: calendar
 ;; URL: http://github.com/dxknight/helm-chronos
 
@@ -127,17 +127,37 @@
                    helm-chronos--recent-timers-source
                    helm-chronos--fallback-source)))
 
-(defun helm-chronos--parse-string-and-add-timer (s)
-  "Parse string S in format <expiry spec> / <message> and call
-`chronos-add-timer'"
+(defun helm-chronos--normalize-timers-string (timers)
+  "Normalize string representation of the list of timers TIMERS."
+  (let* ((ns (mapconcat #'(lambda (ts)
+                            (format "%s/%s"
+                                    (car ts)
+                                    (cadr ts)))
+                        timers
+                        " + "))
+         (sep-pos  (string-match "/" ns))
+         (spaces   (if (and (numberp sep-pos)
+                            (< sep-pos 6))
+                       (make-string (- 6 sep-pos) ?\s)
+                     "")))
+    (concat spaces ns)))
+
+(defun helm-chronos--parse-string-and-add-timer (timers-string)
+  "Parse string TIMERS-STRING which may contain multiple `+' separated
+cumulative timer specifications in the format <expiry spec> /
+<message>.
+
+The resulting timer specifications are added with
+`chronos--make-and-add-timer'."
   (interactive "p")
-  (let* ((stl (split-string s "/"))
-         (time (car stl))
-         (message (nth 1 stl))
-         (norms (format "%6s/%s" time message)))
-    (unless (member norms helm-chronos-standard-timers)
-      (add-to-list 'helm-chronos--recent-timers norms))
-    (chronos-add-timer time message helm-current-prefix-arg)))
+  (let ((timers-string-normalized
+         (helm-chronos--normalize-timers-string
+          (chronos-add-timers-from-string timers-string
+                                          helm-current-prefix-arg))))
+    (unless (member timers-string-normalized
+                    helm-chronos-standard-timers)
+      (add-to-list 'helm-chronos--recent-timers
+                   timers-string-normalized))))
 
 (defun helm-chronos--read-recent-timers ()
   "Read helm-chronos--recent-timers from the file

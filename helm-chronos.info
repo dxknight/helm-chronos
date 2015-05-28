@@ -1,5 +1,5 @@
 This is helm-chronos.info, produced by makeinfo version 4.13 from
-/home/main/wip/projects/helm-chronos/helm-chronos.texi.
+/mnt/share/wip/projects/helm-chronos/helm-chronos.texi.
 
 This manual is for Helm-chronos v1, an Emacs package providing a helm
 interface to chronos.
@@ -14,9 +14,9 @@ interface to chronos.
      included in the section entitled "GNU Free Documentation
      License".
 
-INFO-DIR-SECTION Chronos
+INFO-DIR-SECTION Emacs
 START-INFO-DIR-ENTRY
-* Helm-chronos: (helm-chronos).    Helm interface to chronos.
+* Helm-chronos: (helm-chronos).   Helm interface to chronos.
 END-INFO-DIR-ENTRY
 
 
@@ -25,7 +25,7 @@ File: helm-chronos.info,  Node: Top,  Next: Introduction to Helm-chronos,  Up: (
 Helm-chronos
 ************
 
-This manual is for Helm-chronos v1.
+This manual is for Helm-chronos v1.1
 
 * Menu:
 
@@ -63,19 +63,29 @@ Put helm-chronos.el somewhere Emacs can find it and run `(require
 2.1.1 Dependencies
 ------------------
 
-Helm-chronos requires helm and chronos to be installed.
+Helm-chronos requires helm and chronos (v1.2+, or melpa lates) to be
+installed.
 
 2.2 Quick start
 ===============
 
 `M-x helm-chronos-add-timer' will pop up a helm interface to match
 the pattern you enter against predefined timers.  If no timer matches
-your pattern, a timer definition can be entered directly.
+your pattern, a timer definition can be entered directly using the
+format for `chronos-add-timers-from-string'. For example: "5/Coffee"
+would be for a timer expiring in five minutes with the message
+"Coffee".
 
-   In helm-chronos, the format for timers is a string consisting of a
-chronos expiry time specification and a message, separated by /.  For
-example: "5/Coffee" would be for a timer expiring in five minutes with
-the message "Coffee".
+   Likewise, you could enter a pomodoro style timer with:
+
+     25/Pomodoro: Work on helm-chronos + 5/Pomodoro: Rest
+
+   will give a timer to go off in 25 minute and 30 (=25+5) minutes:
+
+     Expiry      Elapsed      To go  Message
+     [13:10]                         --now--
+     [13:35]                  25:00  Pomodoro: Work on helm-chronos
+     [13:40]                  30:00  Pomodoro: Rest
 
 
 File: helm-chronos.info,  Node: Configuration,  Next: Controls,  Prev: Installation and quick start,  Up: Top
@@ -96,30 +106,10 @@ timers, along the lines of:
      (setq helm-chronos-standard-timers
            '( "     5/Coffee"
               "     4/Tea"
-              "    20/Boil Potatoes"
-              "     8/Steam Broccoli"
-              "     5/Knead bread"
-              "    20/Warm oven"
-              "    30/Bread first rise"
-              "    45/Bread second rise"
-              "    20/Bake ciabatta"
-              "    30/Bake rye bread stage 1"
-              "    20/Bake rye bread stage 2"
-              "     6/Bake oatcakes stage 1"
-              "     3/Bake oatcakes stage 2"
-              "    50/Bake meatloaf"
-              "    20/Pressure large pintas"
-              "    22/Pressure large chickpeas"
-              "    12/Steam rice"
-              "     5/Steam eggs soft"
-              "    10/Steam eggs hard"
-              "    10/Rest eggs at room temp"
-              "    30/Pressure large beetroots"
-              "     4/Soak noodles"
-              "     8/Boil Spaghetti"
-              "    11/Boil Fusilli"))
+              "    25/Pomodoro: work + 5/Pomodoro: rest"
+              "     4/Soak noodles"))
 
-   Formatting the strings so that the /s line up is purely cosmetic.
+   Formatting the strings so that the /s line up is purely cosmetic..
 
 
 File: helm-chronos.info,  Node: Controls,  Next: GNU Free Documentation License,  Prev: Configuration,  Up: Top
@@ -140,7 +130,8 @@ using the standard helm `C-o`.
 current time.  If you want to make it relative to a selected timer,
 use the prefix argument `C-u'.  Remember, with helm interfaces you
 press the prefix argument after calling `helm-chronos-add-timer`, not
-before as is usual in Emacs.
+before as is usual in Emacs.  The prefix argument only affects the
+first timer specified in a string of consecutive timers.
 
 
 File: helm-chronos.info,  Node: GNU Free Documentation License,  Prev: Controls,  Up: Top
@@ -638,11 +629,11 @@ permit their use in free software.
 
 
 Tag Table:
-Node: Top795
-Node: Introduction to Helm-chronos1089
-Node: Installation and quick start1475
-Node: Configuration2414
-Node: Controls3995
-Node: GNU Free Documentation License4784
+Node: Top792
+Node: Introduction to Helm-chronos1087
+Node: Installation and quick start1473
+Node: Configuration2751
+Node: Controls3537
+Node: GNU Free Documentation License4421
 
 End Tag Table
